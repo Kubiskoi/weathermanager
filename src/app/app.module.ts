@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
 import { ChartComponent } from './chart/chart.component';
 import { CalculatorComponent } from './calculator/calculator.component';
-import { NanPipe } from './pipes/nan.pipe';
+import { NaPipe } from './pipes/na.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { NanPipe } from './pipes/nan.pipe';
     TableComponent,
     ChartComponent,
     CalculatorComponent,
-    NanPipe
+    NaPipe
   ],
   imports: [
     BrowserModule,
