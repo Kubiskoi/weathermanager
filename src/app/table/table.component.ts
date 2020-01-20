@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RecordsService } from '../services/records.service';
 
 @Component({
   selector: 'app-table',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  constructor() { }
+  constructor(private recordsService: RecordsService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.recordsService.fetchRecords();
   }
 
 }
