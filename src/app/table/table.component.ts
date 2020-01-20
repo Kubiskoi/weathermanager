@@ -19,7 +19,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.recordsService.fetchRecords();
     this.recordsSubscription = this.recordsService.recordsSubjectChange.subscribe(
       (records: Record[]) => {
-        this.records = records;
+        this.records = records;        
       }
     )
   }
