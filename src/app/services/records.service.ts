@@ -22,6 +22,8 @@ export class RecordsService {
       if (respData.status === 'ok') {
         this.records = respData.records;
         this.recordsSubjectChange.next(this.records.slice());
+      } else if ( respData.status === 'error') {
+        alert('server error')
       }
     });
   }
