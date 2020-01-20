@@ -1,17 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Record } from '../models/record.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecordsService {
+  private records: Record[] = [];
+  public recordsSubjectChange = new Subject<Record[]>(); 
 
   constructor(private http: HttpClient) { }
 
   fetchRecords() {
-    this.http.get('https://www.metaweather.com/api/location/44418/2018/4/30/').subscribe( respData => {
-      console.log(respData);
+    let params = new HttpParams();
+    params = params.append('year','2018');
+    params = params.append('month','04');
+    params = params.append('day','30');
+
+    this.http.get<{status: string, records: Record[]}>('/api', { params: params }).subscribe( respData => {
+      if (respData.status === 'ok') {
+        this.records = respData.records;
+        this.recordsSubjectChange.next(this.records.slice());
+      }
     });
   }
 }

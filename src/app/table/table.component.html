@@ -1,1 +1,4 @@
-<p>table works!</p>
+<p *ngIf="records.length === 0">loading</p>
+<ul>
+    <li *ngFor="let record of records">{{ record.weather_state_name }}</li>
+</ul>
