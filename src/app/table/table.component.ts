@@ -11,6 +11,7 @@ import { Record } from '../models/record.model';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnDestroy {
+  private btnText: string = 'Load Records';
   private records: Record[] = [];
   private recordsSubscription: Subscription;
   private hasData = false;
@@ -32,11 +33,21 @@ export class TableComponent implements OnInit, OnDestroy {
 
     this.recordsSubscription = this.recordsService.recordsSubjectChange.subscribe(
       (records: Record[]) => {
+        this.btnText = 'Reload Records';
         this.records = records;  
         this.hasData = true; 
         this.loading = false;     
       }
     )
+
+    // check if data were loaded before
+    const recordsCheck = this.recordsService.getRecords();
+    if (recordsCheck.length !== 0) {
+      this.records = recordsCheck;
+      this.btnText = 'Reload Records';
+      this.hasData = true;
+    }
+    
   }
 
   onSubmit() {

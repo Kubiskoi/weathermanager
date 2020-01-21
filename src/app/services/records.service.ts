@@ -44,4 +44,8 @@ export class RecordsService {
       }
     });
   }
+
+  getRecords() {
+    return this.records.slice();
+  }
 }

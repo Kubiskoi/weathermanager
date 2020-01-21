@@ -6,7 +6,7 @@
             <mat-datepicker-toggle [for]="myDate" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #myDate></mat-datepicker>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="Submit">Load Records</button>
+        <button mat-raised-button color="primary" type="Submit">{{ btnText }}</button>
     </form>
 
     <div *ngIf="loading">

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+import { ChartService } from '../services/chart.service';
 
 @Component({
   selector: 'app-chart',
@@ -6,10 +9,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
+  private hasData = false;
+  private chartData:{labels: string[]} = {labels:[]};
 
-  constructor() { }
+  private lineChartData: ChartDataSets[] = [];
+  private lineChartLabels: Label[] = [];
+  private lineChartOptions = { responsive: true }
+  private lineChartColors: Color[] = [
+    { borderColor: 'black', backgroundColor: 'rgba(0,0,0,0)'},
+    { borderColor: 'blue', backgroundColor: 'rgba(0,0,0,0)'},
+    { borderColor: 'red', backgroundColor: 'rgba(0,0,0,0)'}
+  ];
+  private lineChartLegend = true;
+  private lineChartPlugins = [];
+  private lineChartType = 'line';
+  
+  constructor(private chartService: ChartService) { }
 
   ngOnInit() {
+    this.chartData = this.chartService.getChartData();
+
+    if (this.chartData.labels.length !== 0) {
+      this.hasData = true;
+      this.lineChartLabels = this.chartData.labels;
+      this.lineChartData = this.chartData.dataSets;
+    }        
   }
 
 }
