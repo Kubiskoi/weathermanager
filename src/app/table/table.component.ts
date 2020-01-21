@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RecordsService } from '../services/records.service';
 import { Subscription } from 'rxjs';
 import { Record } from '../models/record.model';
@@ -11,18 +12,36 @@ import { Record } from '../models/record.model';
 })
 export class TableComponent implements OnInit, OnDestroy {
   private records: Record[] = [];
-  displayedColumns: string[] = ['created', 'weather_state_name','temperature' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
   private recordsSubscription: Subscription;
 
-  constructor(private recordsService: RecordsService) { }
+  private displayedColumns: string[] = ['created', 'weather_state_name','temperature' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
+  private maxDate = new Date();
+
+  private dateForm: FormGroup;
+
+  constructor(
+    private recordsService: RecordsService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.recordsService.fetchRecords();
+    this.dateForm = this.fb.group({
+      date: new Date()
+    });
+
     this.recordsSubscription = this.recordsService.recordsSubjectChange.subscribe(
       (records: Record[]) => {
         this.records = records;        
       }
     )
+  }
+
+  onSubmit() {
+    const date = new Date(this.dateForm.value.date);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1);
+    const day = date.getDate();
+     
+    this.recordsService.fetchRecords(day, month, year);
   }
 
   ngOnDestroy() {

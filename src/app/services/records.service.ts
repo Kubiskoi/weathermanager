@@ -12,11 +12,11 @@ export class RecordsService {
 
   constructor(private http: HttpClient) { }
 
-  fetchRecords() {
+  fetchRecords(day:number, month: number, year: number) {
     let params = new HttpParams();
-    params = params.append('year','2018');
-    params = params.append('month','04');
-    params = params.append('day','30');
+    params = params.append('year',year.toString());
+    params = params.append('month',month.toString());
+    params = params.append('day',day.toString());
 
     this.http.get<{status: string, records: Record[]}>('/api', { params: params }).subscribe( respData => {
       if (respData.status === 'ok') {
