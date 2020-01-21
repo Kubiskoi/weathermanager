@@ -1,4 +1,5 @@
 export interface Record {
+    no: number;
     id: number;
     weather_state_name: string;
     weather_state_abbr: string;

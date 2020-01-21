@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Record } from '../models/record.model';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { stringify } from 'querystring';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +21,21 @@ export class RecordsService {
     params = params.append('month',month.toString());
     params = params.append('day',day.toString());
 
-    this.http.get<{status: string, records: Record[]}>('/api', { params: params }).subscribe( respData => {
+    this.http.get<{status: string, records: Record[]}>('/api', { params: params })
+    .pipe(map( responseData => {
+      const newData:{status: string, records: Record[]} = {status: '', records:[]};
+      if (responseData.status === 'ok') {
+        newData.status = responseData.status;
+        let i = 1;
+        responseData.records.forEach( (record) => {
+          record.no = i;
+          i++;
+          newData.records.push(record);
+        });
+      }
+      return newData;
+    }))
+    .subscribe( respData => {
       if (respData.status === 'ok') {
         this.records = respData.records;
         this.recordsSubjectChange.next(this.records.slice());

@@ -16,7 +16,7 @@ export class TableComponent implements OnInit, OnDestroy {
   private hasData = false;
   private loading = false;
 
-  private displayedColumns: string[] = ['created', 'weather_state_name','temperature' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
+  private displayedColumns: string[] = ['no' ,'created', 'weather_state_name','temperature' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
   private maxDate = new Date();
 
   private dateForm: FormGroup;
