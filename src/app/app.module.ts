@@ -9,6 +9,7 @@ import { TableComponent } from './table/table.component';
 import { ChartComponent } from './chart/chart.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { NaPipe } from './pipes/na.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NaPipe } from './pipes/na.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
