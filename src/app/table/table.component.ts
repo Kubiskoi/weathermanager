@@ -11,6 +11,7 @@ import { Record } from '../models/record.model';
 })
 export class TableComponent implements OnInit, OnDestroy {
   private records: Record[] = [];
+  displayedColumns: string[] = ['created', 'weather_state_name','temperature' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
   private recordsSubscription: Subscription;
 
   constructor(private recordsService: RecordsService) { }

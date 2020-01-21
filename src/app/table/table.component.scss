@@ -1,11 +1,7 @@
-.table-small-text{
-    font-size: 0.8rem;
+table{
+    width: 100%;
 }
 
-.table-wrapper{
-    overflow-x: scroll;
-    
-    table{
-        min-width: 1000px;
-    }
+.table-small-text{
+    font-size: 10px;
 }
