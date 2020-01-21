@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
+import { ChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +39,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonModule
+    MatButtonModule,
+    ChartsModule
   ],
   providers: [MatNativeDateModule],
   bootstrap: [AppComponent]
