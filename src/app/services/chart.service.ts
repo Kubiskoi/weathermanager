@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class ChartService {
   private records: Record[] = [];
-  private returnData:{labels: string[], dataSets: []} = {labels:[], dataSets:[]};
+  private returnData:{labels: string[], dataSets: {label: string, data:number[]}[]} = {labels:[], dataSets:[]};
 
   constructor(private recordsService: RecordsService) { }
 
