@@ -5,3 +5,23 @@ table{
 .table-small-text{
     font-size: 10px;
 }
+
+.form-section {
+    max-width: 300px;
+    margin: 20px 0;
+}
+
+.loading-section {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.spinner-wrap {
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.table-section {
+    margin-bottom: 20px;
+}

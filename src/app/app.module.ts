@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ChartsModule } from 'ng2-charts';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -45,6 +46,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
     MatButtonModule,
     MatRadioModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     ChartsModule,
     StorageServiceModule
   ],

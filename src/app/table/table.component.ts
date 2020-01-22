@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecordsService } from '../services/records.service';
 import { Subscription } from 'rxjs';
 import { Record } from '../models/record.model';
@@ -28,7 +28,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dateForm = this.fb.group({
-      date: new Date()
+      date: [new Date(), Validators.required]
     });
 
     this.recordsSubscription = this.recordsService.recordsSubjectChange.subscribe(
