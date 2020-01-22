@@ -1,5 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { RecordsService } from '../services/records.service';
 import { Subscription } from 'rxjs';
 import { Record } from '../models/record.model';
@@ -12,16 +15,19 @@ import { Record } from '../models/record.model';
 })
 export class TableComponent implements OnInit, OnDestroy {
   private btnText: string = 'Load Records';
-  private records: Record[] = [];
   private recordsSubscription: Subscription;
   private hasData = false;
   private loading = false;
 
-  private displayedColumns: string[] = ['no' ,'created', 'weather_state_name','temperature' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
+  private displayedColumns: string[] = ['no' ,'created', 'weather_state_name','the_temp' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
+  private dataSource: MatTableDataSource<Record>;
   private maxDate = new Date();
 
   private dateForm: FormGroup;
 
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  
   constructor(
     private recordsService: RecordsService,
     private fb: FormBuilder) { }
@@ -34,20 +40,31 @@ export class TableComponent implements OnInit, OnDestroy {
     this.recordsSubscription = this.recordsService.recordsSubjectChange.subscribe(
       (records: Record[]) => {
         this.btnText = 'Reload Records';
-        this.records = records;  
+        this.dataSource = new MatTableDataSource(records);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.hasData = true; 
         this.loading = false;     
       }
-    )
+    );
 
     // check if data were loaded before
     const recordsCheck = this.recordsService.getRecords();
     if (recordsCheck.length !== 0) {
-      this.records = recordsCheck;
+      this.dataSource = new MatTableDataSource(recordsCheck);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       this.btnText = 'Reload Records';
       this.hasData = true;
-    }
+    };
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
     
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   onSubmit() {

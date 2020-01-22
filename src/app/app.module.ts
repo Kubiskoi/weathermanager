@@ -20,6 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material';
+import { MatSortModule } from '@angular/material';
 
 import { ChartsModule } from 'ng2-charts';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -47,6 +49,8 @@ import { StorageServiceModule } from 'angular-webstorage-service';
     MatRadioModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatSortModule,
     ChartsModule,
     StorageServiceModule
   ],
