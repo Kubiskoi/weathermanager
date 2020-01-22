@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 
 import { ChartsModule } from 'ng2-charts';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ChartsModule } from 'ng2-charts';
     MatNativeDateModule,
     MatButtonModule,
     MatRadioModule,
-    ChartsModule
+    ChartsModule,
+    StorageServiceModule
   ],
   providers: [MatNativeDateModule],
   bootstrap: [AppComponent]
