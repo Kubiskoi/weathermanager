@@ -38,6 +38,7 @@
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             </mat-form-field>
 
+            <div class="table-wrap">
             <table mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="no">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
@@ -46,7 +47,7 @@
         
                 <ng-container matColumnDef="created">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Datetime [GMT] </th>
-                    <td mat-cell *matCellDef="let element"> {{ element.created | date:'short':'GMT' }} </td>
+                    <td mat-cell *matCellDef="let element"> {{ element.parsed_datetime }}</td>
                 </ng-container>
         
                 <ng-container matColumnDef="weather_state_name">
@@ -55,7 +56,7 @@
                 </ng-container>
         
                 <ng-container matColumnDef="the_temp">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Temperature [°C] </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <span matTooltip="Temperature [°C]">Temp. [°C]</span> </th>
                     <td mat-cell *matCellDef="let element"> <span matTooltip="Min: {{ element.min_temp | number:'1.0-2' }}, Max: {{ element.max_temp | number:'1.0-2' }}">{{ element.the_temp | number:'1.0-2'}}</span>  </td>
                 </ng-container>
         
@@ -80,7 +81,7 @@
                 </ng-container>
         
                 <ng-container matColumnDef="predictability">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Predict. [%] </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <span matTooltip="Predictability [%]">Predict. [%]</span> </th>
                     <td mat-cell *matCellDef="let element"> {{ element.predictability }} </td>
                 </ng-container>
         
@@ -88,6 +89,7 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         
             </table>
+            </div>
             <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
         </div>
     </div>

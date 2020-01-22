@@ -7,7 +7,6 @@ import { RecordsService } from '../services/records.service';
 import { Subscription } from 'rxjs';
 import { Record } from '../models/record.model';
 
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',

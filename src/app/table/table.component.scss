@@ -24,4 +24,14 @@ table{
 
 .table-section {
     margin-bottom: 20px;
+    overflow-x: scroll;
+    max-width: 1600px;
+
+    .table-wrap {
+        overflow-x: scroll;
+    }
+
+    table {
+        min-width: 1400px;
+    }   
 }

@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { RecordsService } from './records.service';
 import { Record } from '../models/record.model';
 import { DataSet } from '../models/dataSet.model';
-import * as moment from 'moment';
-
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +21,7 @@ export class ChartService {
     const maxTempDataSet:DataSet = {label:'Max Temp [°C]', data: []};
 
     this.records.forEach( record => {
-      // LABELS
-      // GMT diff
-      const localNow = new Date().getTimezoneOffset()*60;
-      // ts in seconds
-      const recordTimeStamp = new Date(record.created).getTime()/1000
-      const momentObj = moment.unix( recordTimeStamp + localNow);
-      labels.unshift(momentObj.format('hh:mm A'));
+      labels.unshift(record.parsed_datetime);
 
       // TEMPS
       theTempDataSet.data.unshift(+record.the_temp.toFixed(3));

@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Record } from '../models/record.model';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,8 @@ export class RecordsService {
         let i = 1;
         responseData.records.forEach( (record) => {
           record.no = i;
+          const momentObj = moment.utc(record.created);
+          record.parsed_datetime = momentObj.format('DD/MM/YYYY, hh:mm A');
           i++;
           newData.records.push(record);
         });

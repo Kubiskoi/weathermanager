@@ -15,4 +15,5 @@ export interface Record {
   humidity: number;
   visibility: number;
   predictability: number;
+  parsed_datetime: string;
 }
