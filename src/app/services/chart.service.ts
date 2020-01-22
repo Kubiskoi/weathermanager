@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RecordsService } from './records.service';
 import { Record } from '../models/record.model';
+import { DataSet } from '../models/dataSet.model';
 import * as moment from 'moment';
 
 
@@ -9,7 +10,7 @@ import * as moment from 'moment';
 })
 export class ChartService {
   private records: Record[] = [];
-  private returnData:{labels: string[], dataSets: {label: string, data:number[]}[]} = {labels:[], dataSets:[]};
+  private returnData:{labels: string[], dataSets: DataSet[]} = {labels:[], dataSets:[]};
 
   constructor(private recordsService: RecordsService) { }
 
@@ -17,9 +18,9 @@ export class ChartService {
     this.returnData.dataSets = [];
     this.records = this.recordsService.getRecords();
     const labels = [];
-    const theTempDataSet:{label: string, data:number[]} = {label:'The Temp [°C]', data: []};
-    const minTempDataSet:{label: string, data:number[]} = {label:'Min Temp [°C]', data: []};
-    const maxTempDataSet:{label: string, data:number[]} = {label:'Max Temp [°C]', data: []};
+    const theTempDataSet:DataSet = {label:'The Temp [°C]', data: []};
+    const minTempDataSet:DataSet = {label:'Min Temp [°C]', data: []};
+    const maxTempDataSet:DataSet = {label:'Max Temp [°C]', data: []};
 
     this.records.forEach( record => {
       // LABELS

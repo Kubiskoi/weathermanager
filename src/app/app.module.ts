@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ChartsModule } from 'ng2-charts';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -51,6 +52,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatSortModule,
+    MatTooltipModule,
     ChartsModule,
     StorageServiceModule
   ],

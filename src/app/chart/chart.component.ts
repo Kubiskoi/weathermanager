@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { ChartService } from '../services/chart.service';
+import { DataSet } from '../models/dataSet.model';
+
 
 @Component({
   selector: 'app-chart',
@@ -10,7 +12,7 @@ import { ChartService } from '../services/chart.service';
 })
 export class ChartComponent implements OnInit {
   private hasData = false;
-  private chartData:{labels: string[], dataSets: {label: string, data:number[]}[] } = {labels:[], dataSets:[]};
+  private chartData:{labels: string[], dataSets: DataSet[] } = {labels:[], dataSets:[]};
   private lineChartData: ChartDataSets[] = [];
   private lineChartLabels: Label[] = [];
   private lineChartOptions = { 
