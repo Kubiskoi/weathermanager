@@ -11,7 +11,7 @@ import { DataSet } from '../models/dataSet.model';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
-  private hasData = false;
+  hasData = false;
   private chartData:{labels: string[], dataSets: DataSet[] } = {labels:[], dataSets:[]};
   lineChartData: ChartDataSets[] = [];
   lineChartLabels: Label[] = [];
