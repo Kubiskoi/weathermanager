@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { RecordsService } from './records.service';
 import { Record } from '../models/record.model';
-import * as moment from 'moment';
-
+import { DataSet } from '../models/dataSet.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartService {
   private records: Record[] = [];
-  private returnData:{labels: string[], dataSets: {label: string, data:number[]}[]} = {labels:[], dataSets:[]};
+  private returnData:{labels: string[], dataSets: DataSet[]} = {labels:[], dataSets:[]};
 
   constructor(private recordsService: RecordsService) { }
 
@@ -17,18 +16,12 @@ export class ChartService {
     this.returnData.dataSets = [];
     this.records = this.recordsService.getRecords();
     const labels = [];
-    const theTempDataSet:{label: string, data:number[]} = {label:'The Temp [°C]', data: []};
-    const minTempDataSet:{label: string, data:number[]} = {label:'Min Temp [°C]', data: []};
-    const maxTempDataSet:{label: string, data:number[]} = {label:'Max Temp [°C]', data: []};
+    const theTempDataSet:DataSet = {label:'The Temp [°C]', data: []};
+    const minTempDataSet:DataSet = {label:'Min Temp [°C]', data: []};
+    const maxTempDataSet:DataSet = {label:'Max Temp [°C]', data: []};
 
     this.records.forEach( record => {
-      // LABELS
-      // GMT diff
-      const localNow = new Date().getTimezoneOffset()*60;
-      // ts in seconds
-      const recordTimeStamp = new Date(record.created).getTime()/1000
-      const momentObj = moment.unix( recordTimeStamp + localNow);
-      labels.unshift(momentObj.format('hh:mm A'));
+      labels.unshift(record.parsed_datetime);
 
       // TEMPS
       theTempDataSet.data.unshift(+record.the_temp.toFixed(3));
