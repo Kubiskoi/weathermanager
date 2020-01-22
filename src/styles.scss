@@ -5,7 +5,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 header { background-color: white; }
 
 .content {
-    max-width: 1200px;
     padding: 0 20px;
 }
 
@@ -15,4 +14,21 @@ header { background-color: white; }
 
 .shadow {
     box-shadow: 1px 3px 5px 0px rgba(0,0,0,0.4);
+}
+
+.inner-section {
+    padding: 20px;
+}
+
+.title {
+    padding-bottom: 10px;
+}
+
+.title-text {
+    padding-bottom: 6px;
+}
+
+.sub-text {
+    font-size: 0.8rem;
+    opacity: 0.6;
 }

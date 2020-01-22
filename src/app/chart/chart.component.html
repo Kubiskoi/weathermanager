@@ -1,9 +1,21 @@
-<div>
-    <div *ngIf="!hasData">
-        No weather records! Please load data in <a routerLink="/table">table tab.</a>
+<section *ngIf="!hasData" class="no-data-section">
+    <div class="shadow bg-white">
+        <div class="inner-section">
+            No weather records! Please load data in <a routerLink="/table">table tab.</a>
+        </div>
     </div>
-    <div *ngIf="hasData" class="chart-wrapper">
-        <canvas baseChart 
+</section>
+
+<section *ngIf="hasData" class="chart-section">
+    <div class="shadow bg-white">
+        <div class="inner-section">
+            
+            <div class="title">
+                <div class="title-text">Line Chart</div>
+                <div class="sub-text">Relationship between time and temperature</div>
+            </div>
+
+            <canvas baseChart 
             [datasets]="lineChartData" 
             [labels]="lineChartLabels" 
             [options]="lineChartOptions"
@@ -11,7 +23,7 @@
             [legend]="lineChartLegend" 
             [chartType]="lineChartType" 
             [plugins]="lineChartPlugins">
-        </canvas>
+            </canvas>
+        </div>
     </div>
-</div>
-
+</section>
