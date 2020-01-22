@@ -18,6 +18,13 @@ export class ChartComponent implements OnInit {
   private lineChartOptions = { 
     responsive: true,
     scales: {
+      xAxes: [{
+        ticks: {
+          callback: (tick, index, array) => {
+            return (index % 3) ? "" : tick;
+          }
+        }
+      }],
       yAxes: [{
         scaleLabel: {
           display: true,

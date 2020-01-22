@@ -12,18 +12,20 @@
             
             <div class="title">
                 <div class="title-text">Line Chart</div>
-                <div class="sub-text">Relationship between time and temperature</div>
+                <div class="sub-text">Relationship between datetime and temperature</div>
             </div>
 
-            <canvas baseChart 
-            [datasets]="lineChartData" 
-            [labels]="lineChartLabels" 
-            [options]="lineChartOptions"
-            [colors]="lineChartColors" 
-            [legend]="lineChartLegend" 
-            [chartType]="lineChartType" 
-            [plugins]="lineChartPlugins">
-            </canvas>
+            <div class="chart-wrap">
+                <canvas baseChart 
+                [datasets]="lineChartData" 
+                [labels]="lineChartLabels" 
+                [options]="lineChartOptions"
+                [colors]="lineChartColors" 
+                [legend]="lineChartLegend" 
+                [chartType]="lineChartType" 
+                [plugins]="lineChartPlugins">
+                </canvas>
+            </div>
         </div>
     </div>
 </section>
