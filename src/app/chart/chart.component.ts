@@ -14,7 +14,17 @@ export class ChartComponent implements OnInit {
 
   private lineChartData: ChartDataSets[] = [];
   private lineChartLabels: Label[] = [];
-  private lineChartOptions = { responsive: true }
+  private lineChartOptions = { 
+    responsive: true,
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: 'Temperature [°C]'
+        }
+      }]
+    }
+  };
   private lineChartColors: Color[] = [
     { borderColor: 'black', backgroundColor: 'rgba(0,0,0,0)'},
     { borderColor: 'blue', backgroundColor: 'rgba(0,0,0,0)'},
