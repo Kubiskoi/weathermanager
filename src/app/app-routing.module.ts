@@ -4,7 +4,6 @@ import { TableComponent } from './table/table.component';
 import { ChartComponent } from './chart/chart.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/table' , pathMatch: 'full'},
   { path: 'table', component: TableComponent },

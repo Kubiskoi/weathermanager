@@ -1,67 +1,90 @@
-<div>
+<section class="form-section">
+    <div class="shadow bg-white">
+        <div class="inner-section">
+            <form [formGroup]="dateForm" (ngSubmit)="onSubmit()">
+                <div class="title">
+                    <div class="title-text">Select date</div>
+                    <div class="sub-text">To load weather records</div>
+                </div>
 
-    <form [formGroup]="dateForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
-            <input matInput [matDatepicker]="myDate" [max]="maxDate" formControlName="date">
-            <mat-datepicker-toggle [for]="myDate" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #myDate></mat-datepicker>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="Submit">{{ btnText }}</button>
-    </form>
-
-    <div *ngIf="loading">
-        Loading
+                <div class="form-row">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="myDate" [max]="maxDate" formControlName="date">
+                        <mat-datepicker-toggle [for]="myDate" matSuffix></mat-datepicker-toggle>
+                        <mat-datepicker #myDate></mat-datepicker>
+                        <mat-error *ngIf="!dateForm.get('date').valid && dateForm.get('date').errors['required'] && dateForm.get('date').touched">Date is required.</mat-error>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button [disabled]="dateForm.invalid" color="primary" type="submit">{{ btnText }}</button>
+            </form>
+        </div>
     </div>
+</section>
 
-    <table *ngIf="hasData" mat-table [dataSource]="records">
-        <ng-container matColumnDef="no">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{ element.no }} </td>
-        </ng-container>
+<section *ngIf="loading" class="loading-section">
+    <div class="shadow bg-white">
+        <div class="inner-section">
+            <div class="spinner-wrap">
+                <mat-spinner></mat-spinner>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <ng-container matColumnDef="created">
-            <th mat-header-cell *matHeaderCellDef> Datetime [GMT] </th>
-            <td mat-cell *matCellDef="let element"> {{ element.created | date:'short':'GMT' }} </td>
-        </ng-container>
+<section *ngIf="hasData" class="table-section">
+    <div class="shadow bg-white">
+        <div class="inner-section">
 
-        <ng-container matColumnDef="weather_state_name">
-            <th mat-header-cell *matHeaderCellDef> State </th>
-            <td mat-cell *matCellDef="let element"> {{ element.weather_state_name }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="temperature">
-            <th mat-header-cell *matHeaderCellDef> Temperature [°C] </th>
-            <td mat-cell *matCellDef="let element"> {{ element.the_temp | number:'1.0-2'}} <span class="table-small-text">[{{ element.min_temp | number:'1.0-2'}}, {{ element.max_temp | number:'1.0-2'}}]</span> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="air_pressure">
-            <th mat-header-cell *matHeaderCellDef> Air Pressure [mbar] </th>
-            <td mat-cell *matCellDef="let element"> {{ element.air_pressure | number }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="humidity">
-            <th mat-header-cell *matHeaderCellDef> Humidity [%] </th>
-            <td mat-cell *matCellDef="let element"> {{ element.humidity }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="wind_speed">
-            <th mat-header-cell *matHeaderCellDef> Wind Speed [mph] </th>
-            <td mat-cell *matCellDef="let element"> {{ element.wind_speed | number:'1.0-2' }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="visibility">
-            <th mat-header-cell *matHeaderCellDef> Visibility [mi] </th>
-            <td mat-cell *matCellDef="let element"> {{ element.visibility | number:'1.0-2' | na }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="predictability">
-            <th mat-header-cell *matHeaderCellDef> Predict. [%] </th>
-            <td mat-cell *matCellDef="let element"> {{ element.predictability }} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    </table>
-
-</div>
+            <table mat-table [dataSource]="records">
+                <ng-container matColumnDef="no">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.no }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="created">
+                    <th mat-header-cell *matHeaderCellDef> Datetime [GMT] </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.created | date:'short':'GMT' }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="weather_state_name">
+                    <th mat-header-cell *matHeaderCellDef> State </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.weather_state_name }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="temperature">
+                    <th mat-header-cell *matHeaderCellDef> Temperature [°C] </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.the_temp | number:'1.0-2'}} <span class="table-small-text">[{{ element.min_temp | number:'1.0-2'}}, {{ element.max_temp | number:'1.0-2'}}]</span> </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="air_pressure">
+                    <th mat-header-cell *matHeaderCellDef> Air Pressure [mbar] </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.air_pressure | number }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="humidity">
+                    <th mat-header-cell *matHeaderCellDef> Humidity [%] </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.humidity }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="wind_speed">
+                    <th mat-header-cell *matHeaderCellDef> Wind Speed [mph] </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.wind_speed | number:'1.0-2' }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="visibility">
+                    <th mat-header-cell *matHeaderCellDef> Visibility [mi] </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.visibility | number:'1.0-2' | na }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="predictability">
+                    <th mat-header-cell *matHeaderCellDef> Predict. [%] </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.predictability }} </td>
+                </ng-container>
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+            </table>
+        </div>
+    </div>
+</section>

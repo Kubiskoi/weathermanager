@@ -11,7 +11,6 @@ import { ChartService } from '../services/chart.service';
 export class ChartComponent implements OnInit {
   private hasData = false;
   private chartData:{labels: string[], dataSets: {label: string, data:number[]}[] } = {labels:[], dataSets:[]};
-
   private lineChartData: ChartDataSets[] = [];
   private lineChartLabels: Label[] = [];
   private lineChartOptions = { 
@@ -37,7 +36,6 @@ export class ChartComponent implements OnInit {
   constructor(private chartService: ChartService) { }
 
   ngOnInit() {
-    
     this.chartData = this.chartService.getChartData();
 
     if (this.chartData.labels.length !== 0) {
@@ -46,5 +44,4 @@ export class ChartComponent implements OnInit {
       this.lineChartData = this.chartData.dataSets;
     }        
   }
-
 }
