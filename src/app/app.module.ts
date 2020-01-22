@@ -17,6 +17,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -40,6 +41,7 @@ import { ChartsModule } from 'ng2-charts';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatRadioModule,
     ChartsModule
   ],
   providers: [MatNativeDateModule],
