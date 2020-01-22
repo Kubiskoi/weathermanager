@@ -3,7 +3,6 @@ import { HeatIndex } from '../models/heatIndex.model';
 import { LOCAL_STORAGE, StorageService } from 'angular-webstorage-service';
 import { Subject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,10 +11,7 @@ export class CalcService {
   private STORAGE_KEY = 'local_hi';
   public recordsSubjectChange = new Subject<HeatIndex[]>(); 
 
-
-  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
-    
-  }
+  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) { }
 
   getHeatIndexRecords() {
     this.heatIndexRecords = this.storage.get(this.STORAGE_KEY) || [];
@@ -47,25 +43,26 @@ export class CalcService {
 
   store(hi: HeatIndex) {
     this.heatIndexRecords = this.storage.get(this.STORAGE_KEY) || [];
+    
     if (this.heatIndexRecords.length == 5) {
       this.heatIndexRecords.pop();
     }
+    
     this.heatIndexRecords.unshift(hi);
     this.storage.set(this.STORAGE_KEY, this.heatIndexRecords);
+    
     this.recordsSubjectChange.next(
       this.storage.get(this.STORAGE_KEY) || []
     );
   }
 
   assignStatus(heatIndex: number): string {
-    if( heatIndex < 77 ) return 'Normal';
-    if( heatIndex >= 77 && heatIndex < 90 ) return 'Caution';
-    if( heatIndex >= 90 && heatIndex < 105 ) return 'Extreme Caution';
-    if( heatIndex >= 105 && heatIndex < 130 ) return 'Danger';
-    if( heatIndex >= 130 ) return 'Extreme Danger';
+    if (heatIndex < 77) return 'Normal';
+    if (heatIndex >= 77 && heatIndex < 90) return 'Caution';
+    if (heatIndex >= 90 && heatIndex < 105) return 'Extreme Caution';
+    if (heatIndex >= 105 && heatIndex < 130) return 'Danger';
+    if (heatIndex >= 130) return 'Extreme Danger';
   }
-
-
 
   CtoF(tempC: number): number {
     return +((tempC * 1.8 + 32).toFixed(2));

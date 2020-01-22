@@ -5,8 +5,6 @@ import { CalcService } from '../services/calc.service';
 import { HeatIndex } from '../models/heatIndex.model';
 import { Subscription } from 'rxjs';
 
-
-
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
@@ -14,8 +12,6 @@ import { Subscription } from 'rxjs';
   providers: [{provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'primary' },}]
 })
-
-
 export class CalculatorComponent implements OnInit, OnDestroy {
   private calcForm: FormGroup;
   private units = ['c','f'];
@@ -23,7 +19,6 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   private hasHeatIndexValue = false;
   private heatIndexRecords: HeatIndex[] = [];
   private heatIndexRecordsSubscripion: Subscription;
-
 
   constructor(private calcService: CalcService) { }
 
@@ -44,10 +39,10 @@ export class CalculatorComponent implements OnInit, OnDestroy {
             newTemp = this.calcService.CtoF(temp);
           } else if (unit === 'c') {
             newTemp = this.calcService.FtoC(temp);
-          }
+          };
           this.calcForm.patchValue({
             'temp': newTemp
-          })
+          });
           this.calcForm.controls['temp'].updateValueAndValidity();
         }
       }
@@ -58,8 +53,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       (records: HeatIndex[]) => {
         this.heatIndexRecords = records;
       }
-    )
-    
+    );
   }
 
   onSubmit() {
@@ -69,21 +63,20 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       this.calcForm.value.temp,
       this.calcForm.value.unit,
       this.calcForm.value.rh,
-    )  
+    );
+
     this.hasHeatIndexValue = true;
-  
   }
 
   unitMin(control: FormControl): {[s: string]: boolean} {    
-    if( this.calcForm && control.value) {
+    if (this.calcForm && control.value) {
       const unit = this.calcForm.value.unit;
-
       if (unit === 'c' && control.value < 26.7) {
         return {'cMin': true};
       } else if (unit === 'f' && control.value < 80) {
         return {'fMin': true};
-      }
-    }
+      };
+    };
     return null;
   }
 
@@ -94,5 +87,4 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.heatIndexRecordsSubscripion.unsubscribe();
   }
-
 }
