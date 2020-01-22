@@ -1,46 +1,81 @@
-<div>
-    <form [formGroup]="calcForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
-            <input matInput id="temp" type="number" step="0.01" placeholder="Temperature" formControlName="temp">
-        </mat-form-field>[°{{ this.calcForm.value.unit | uppercase}}]
-        <div *ngIf="!calcForm.get('temp').valid && calcForm.get('temp').touched">
-            <div *ngIf="calcForm.get('temp').errors['cMin']">Temperature must be equal or greater than 26.7 °C.</div>
-            <div *ngIf="calcForm.get('temp').errors['fMin']">Temperature must be equal or greater than 80 °F.</div>
-            <div *ngIf="calcForm.get('temp').errors['required']">Temperature is required.</div>
-        </div>
-        <br>
-        <mat-radio-group formControlName="unit">
-            <mat-radio-button *ngFor="let unit of units" [value]="unit">
-                [°{{ unit | uppercase }}]
-            </mat-radio-button>
-        </mat-radio-group>
-        <br>
-        <br>
-        <mat-form-field>
-            <input matInput type="number" min="0" max="100" step="0.01" placeholder="Relative Humidity" formControlName="rh">
-        </mat-form-field>[%]
-        
-        <div *ngIf="!calcForm.get('rh').valid && calcForm.get('rh').touched">
-            <div *ngIf="calcForm.get('rh').errors['min']">Relative Humidity must be greater than 0.</div>
-            <div *ngIf="calcForm.get('rh').errors['max']">Relative Humidity must be lower than 100.</div>
-            <div *ngIf="calcForm.get('rh').errors['required']">Relative Humidity is required.</div>
-        </div>
+<div class="wrap">
+    <div class="part">
+        <section class="form-section">
+            <div class="shadow bg-white">
+                <form class="inner-section" [formGroup]="calcForm" (ngSubmit)="onSubmit()">
+                    <div class="title">
+                        <div class="title-text">Calculate Heat Index</div>
+                        <div class="sub-text">Based on Temperature and Relative Humidity</div>
+                    </div>
 
-        <br>
-        <button mat-raised-button [disabled]="calcForm.invalid" color="primary" type="Submit">Compute</button>
-    </form>
+                    <div class="form-row">
+                        <mat-form-field>
+                            <input matInput id="temp" type="number" step="0.01" placeholder="Temperature [°{{ this.calcForm.value.unit | uppercase}}]" formControlName="temp">
+                            <mat-error *ngIf="!calcForm.get('temp').valid && calcForm.get('temp').errors['cMin'] && calcForm.get('temp').touched">Temperature must be equal or greater than 26.7 °C.</mat-error>
+                            <mat-error *ngIf="!calcForm.get('temp').valid && calcForm.get('temp').errors['fMin'] && calcForm.get('temp').touched">Temperature must be equal or greater than 80 °F.</mat-error>
+                            <mat-error *ngIf="!calcForm.get('temp').valid && calcForm.get('temp').errors['required'] && calcForm.get('temp').touched">Temperature is required.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="form-row">
+                        <mat-radio-group formControlName="unit">
+                            <mat-radio-button *ngFor="let unit of units" [value]="unit">
+                                [°{{ unit | uppercase }}]
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
 
-    <div *ngIf="hasHeatIndexValue">
-        <p>In Celsius: {{ heatIndex.inC }}</p>
-        <p>In F: {{ heatIndex.inF }}</p>
-        <p>Status: {{ heatIndex.status }}</p>
+                    <div class="form-row">
+                        <mat-form-field>
+                            <input matInput type="number" min="0" max="100" step="0.01" placeholder="Relative Humidity [%]" formControlName="rh">
+                            <mat-error *ngIf="!calcForm.get('rh').valid && calcForm.get('rh').errors['min'] && calcForm.get('rh').touched">Relative Humidity must be greater than 0.</mat-error>
+                            <mat-error *ngIf="!calcForm.get('rh').valid && calcForm.get('rh').errors['max'] && calcForm.get('rh').touched">Relative Humidity must be lower than 100.</mat-error>
+                            <mat-error *ngIf="!calcForm.get('rh').valid && calcForm.get('rh').errors['required'] && calcForm.get('rh').touched">Relative Humidity is required.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div>
+                        <button mat-raised-button [disabled]="calcForm.invalid" color="primary" type="submit">Compute</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section *ngIf="hasHeatIndexValue" class="result-section">
+            <div class="shadow bg-white">
+                <div class="inner-section">
+                    <div class="title">
+                        <div class="title-text">Result</div>
+                        <div class="sub-text">Heat Index</div>
+                    </div>
+                    <p class="res-p"><span class="gray">°C:</span> {{ heatIndex.inC }}</p>
+                    <p class="res-p"><span class="gray">°F:</span> {{ heatIndex.inF }}</p>
+                    <p><span class="gray">Status:</span> {{ heatIndex.status }}</p>
+                </div>
+            </div>    
+        </section>
     </div>
 
+    <div class="part">
+        <section class="history-section">
+            <div class="shadow bg-white">
+                <div class="inner-section">
+                    <div class="title">
+                        <div class="title-text">Heat Index</div>
+                        <div class="sub-text">History data</div>
+                    </div>
 
-    <div>
-        <ul>
-            <li *ngFor="let hir of heatIndexRecords">{{ hir.inC }} - {{ hir.inF }} - {{ hir.status }}</li>
-        </ul>
-        <button (click)="onClearHIrecords()">Clear records</button>
+                    <div class="no-data" *ngIf="heatIndexRecords.length === 0">
+                        <mat-icon aria-hidden="false" aria-label="icon">explore_off</mat-icon>
+                        <div class="gray">No data.</div>
+                    </div>
+
+                    <div *ngIf="heatIndexRecords.length !== 0">
+                        <p class="history-data" *ngFor="let hir of heatIndexRecords">{{ hir.inC }} °C - {{ hir.inF }} °F - {{ hir.status }}</p>
+                        <button mat-raised-button color="primary" type="button" (click)="onClearHIrecords()">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </div>

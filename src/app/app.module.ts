@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ChartsModule } from 'ng2-charts';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -43,6 +44,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
     MatNativeDateModule,
     MatButtonModule,
     MatRadioModule,
+    MatIconModule,
     ChartsModule,
     StorageServiceModule
   ],

@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #E8E8E8; }
+header { background-color: white; }
+
+.content {
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.shadow {
+    box-shadow: 1px 3px 5px 0px rgba(0,0,0,0.4);
+}

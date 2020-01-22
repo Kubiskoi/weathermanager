@@ -1,0 +1,79 @@
+@import "../../variables.scss";
+
+.form-section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.inner-section {
+    padding: 20px;
+}
+
+.title {
+    padding-bottom: 10px;
+}
+
+.title-text {
+    padding-bottom: 6px;
+}
+
+.sub-text {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.form-row {
+    padding-bottom: 25px;
+}
+
+.mat-radio-button:first-child {
+    margin-right: 20px;
+}
+
+.result-section {
+    margin-bottom: 20px;
+}
+
+.gray {
+    opacity: 0.6;
+}
+
+.res-p {
+    padding-bottom: 5px;
+}
+
+p {
+    margin: 0;
+}
+
+.history-section {
+    margin-bottom: 20px;
+    @media only screen and (min-width: $sm) {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+}
+
+.no-data{
+    text-align: center;
+    padding: 20px 0;
+}
+
+.history-data {
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
+.wrap {
+    @media only screen and (min-width: $sm) {
+        display: flex;
+    }
+}
+
+.part {
+    flex: 300px 0 0;
+}

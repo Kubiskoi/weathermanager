@@ -1,3 +1,16 @@
-.mat-tab-label-active{
+@import "../variables.scss";
+
+.heading{ 
+    margin: 0;
+    text-align: center;
+    padding: 30px 0 20px 0;
+    font-weight: normal;
+
+    @media only screen and (min-width: $xxs) {
+        text-align: left;
+    }
+}
+
+.mat-tab-label-active {
     opacity: 1;
 }
