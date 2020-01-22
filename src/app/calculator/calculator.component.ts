@@ -13,12 +13,12 @@ import { Subscription } from 'rxjs';
     useValue: { color: 'primary' },}]
 })
 export class CalculatorComponent implements OnInit, OnDestroy {
-  private calcForm: FormGroup;
-  private units = ['c','f'];
-  private heatIndex: HeatIndex;
-  private hasHeatIndexValue = false;
-  private heatIndexRecords: HeatIndex[] = [];
-  private heatIndexRecordsSubscripion: Subscription;
+  calcForm: FormGroup;
+  units = ['c','f'];
+  heatIndex: HeatIndex;
+  hasHeatIndexValue = false;
+  heatIndexRecords: HeatIndex[] = [];
+  heatIndexRecordsSubscripion: Subscription;
 
   constructor(private calcService: CalcService) { }
 

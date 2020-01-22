@@ -13,16 +13,16 @@ import { Record } from '../models/record.model';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, OnDestroy {
-  private btnText: string = 'Load Records';
+  btnText: string = 'Load Records';
   private recordsSubscription: Subscription;
-  private hasData = false;
-  private loading = false;
+  hasData = false;
+  loading = false;
 
-  private displayedColumns: string[] = ['no' ,'created', 'weather_state_name','the_temp' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
-  private dataSource: MatTableDataSource<Record>;
-  private maxDate = new Date();
+  displayedColumns: string[] = ['no' ,'created', 'weather_state_name','the_temp' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
+  dataSource: MatTableDataSource<Record>;
+  maxDate = new Date();
 
-  private dateForm: FormGroup;
+  dateForm: FormGroup;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

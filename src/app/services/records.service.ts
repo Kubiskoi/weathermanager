@@ -21,8 +21,8 @@ export class RecordsService {
     params = params.append('month',month.toString());
     params = params.append('day',day.toString());
 
-    this.http.get<{status: string, records: Record[]}>('/api', { params: params })
-    // this.http.get<{status: string, records: Record[]}>('https://weproxyapi.herokuapp.com/api', { params: params })
+    // this.http.get<{status: string, records: Record[]}>('/api', { params: params })
+    this.http.get<{status: string, records: Record[]}>('https://weproxyapi.herokuapp.com/api', { params: params })
     .pipe(map( responseData => {
       const newData:{status: string, records: Record[]} = {status: '', records:[]};
       if (responseData.status === 'ok') {

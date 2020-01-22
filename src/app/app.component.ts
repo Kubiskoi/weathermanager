@@ -8,7 +8,7 @@ import { Link } from './models/link.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private links: Link[]  = [
+  links: Link[]  = [
     {url: '/table', label: 'Table'},
     {url: '/chart', label: 'Chart'},
     {url: '/calculator', label: 'Calculator'}

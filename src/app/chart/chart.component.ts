@@ -13,9 +13,9 @@ import { DataSet } from '../models/dataSet.model';
 export class ChartComponent implements OnInit {
   private hasData = false;
   private chartData:{labels: string[], dataSets: DataSet[] } = {labels:[], dataSets:[]};
-  private lineChartData: ChartDataSets[] = [];
-  private lineChartLabels: Label[] = [];
-  private lineChartOptions = { 
+  lineChartData: ChartDataSets[] = [];
+  lineChartLabels: Label[] = [];
+  lineChartOptions = { 
     responsive: true,
     scales: {
       xAxes: [{
@@ -33,14 +33,14 @@ export class ChartComponent implements OnInit {
       }]
     }
   };
-  private lineChartColors: Color[] = [
+  lineChartColors: Color[] = [
     { borderColor: 'black', backgroundColor: 'rgba(0,0,0,0)'},
     { borderColor: 'blue', backgroundColor: 'rgba(0,0,0,0)'},
     { borderColor: 'red', backgroundColor: 'rgba(0,0,0,0)'}
   ];
-  private lineChartLegend = true;
-  private lineChartPlugins = [];
-  private lineChartType = 'line';
+  lineChartLegend = true;
+  lineChartPlugins = [];
+  lineChartType = 'line';
   
   constructor(private chartService: ChartService) { }
 
