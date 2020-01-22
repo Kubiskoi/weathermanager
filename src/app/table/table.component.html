@@ -52,7 +52,7 @@
         
                 <ng-container matColumnDef="weather_state_name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
-                    <td mat-cell *matCellDef="let element"> {{ element.weather_state_name }} </td>
+                    <td mat-cell *matCellDef="let element"> <img class="weather-icon" src="https://www.metaweather.com/static/img/weather/{{element.weather_state_abbr}}.svg" alt="icon" matTooltip="{{ element.weather_state_name }}"></td>
                 </ng-container>
         
                 <ng-container matColumnDef="the_temp">
