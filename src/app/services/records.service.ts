@@ -38,14 +38,21 @@ export class RecordsService {
       }
       return newData;
     }))
-    .subscribe( respData => {
-      if (respData.status === 'ok') {
-        this.records = respData.records;
-        this.recordsSubjectChange.next(this.records.slice());
-      } else if ( respData.status === 'error') {
-        alert('server error')
+    .subscribe(
+      respData => {
+        if (respData.status === 'ok') {
+          this.records = respData.records;
+          this.recordsSubjectChange.next(this.records.slice());
+        } else if ( respData.status === 'error') {
+          alert('server error');
+          this.recordsSubjectChange.next([]);
+        }
+      },
+      error => {
+        alert('server error');
+        this.recordsSubjectChange.next([]);
       }
-    });
+    );
   }
 
   getRecords() {

@@ -38,11 +38,14 @@ export class TableComponent implements OnInit, OnDestroy {
 
     this.recordsSubscription = this.recordsService.recordsSubjectChange.subscribe(
       (records: Record[]) => {
-        this.btnText = 'Reload Records';
-        this.dataSource = new MatTableDataSource(records);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.hasData = true; 
+        
+        if (records.length !== 0) {
+          this.btnText = 'Reload Records';
+          this.dataSource = new MatTableDataSource(records);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.hasData = true; 
+        }
         this.loading = false;     
       }
     );
