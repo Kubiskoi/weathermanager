@@ -21,7 +21,7 @@ export class LocalStorageService {
     this.storage.set(this.STORAGE_KEY, storedHeatIndexes);
   }
 
-  getHeatIndexes() {
+  getHeatIndexRecords() {
     return this.storage.get(this.STORAGE_KEY) || [];
   }
 

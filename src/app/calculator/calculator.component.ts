@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { CalcService } from '../services/calc.service';
@@ -13,13 +13,12 @@ import { LocalStorageService } from '../services/storage.service';
   providers: [{provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'primary' },}]
 })
-export class CalculatorComponent implements OnInit, OnDestroy {
+export class CalculatorComponent implements OnInit {
   calcForm: FormGroup;
   units = ['c','f'];
   heatIndex: HeatIndex;
   hasHeatIndexValue = false;
   heatIndexRecords: HeatIndex[] = [];
-  // heatIndexRecordsSubscripion: Subscription;
 
   constructor(
     private calcService: CalcService,
@@ -51,14 +50,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       }
     );
     
-    this.heatIndexRecords = this.localStorageService.getHeatIndexes();
-
-    // this.heatIndexRecords = this.calcService.getHeatIndexRecords();
-    // this.heatIndexRecordsSubscripion = this.calcService.recordsSubjectChange.subscribe(
-    //   (records: HeatIndex[]) => {
-    //     this.heatIndexRecords = records;
-    //   }
-    // );
+    this.heatIndexRecords = this.localStorageService.getHeatIndexRecords();
   }
 
   onSubmit() {
@@ -73,7 +65,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.hasHeatIndexValue = true;
 
     this.localStorageService.store(this.heatIndex);
-    this.heatIndexRecords = this.localStorageService.getHeatIndexes();
+    this.heatIndexRecords = this.localStorageService.getHeatIndexRecords();
   }
 
   unitMin(control: FormControl): {[s: string]: boolean} {    
@@ -92,5 +84,4 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.localStorageService.clearStorage();
     this.heatIndexRecords = [];
   }
-
 }
