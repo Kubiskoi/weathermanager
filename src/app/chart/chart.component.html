@@ -15,17 +15,19 @@
                 <div class="sub-text">Relationship between datetime and temperature</div>
             </div>
 
-            <div class="chart-wrap">
-                <canvas baseChart 
-                [datasets]="lineChartData" 
-                [labels]="lineChartLabels" 
-                [options]="lineChartOptions"
-                [colors]="lineChartColors" 
-                [legend]="lineChartLegend" 
-                [chartType]="lineChartType" 
-                [plugins]="lineChartPlugins">
-                </canvas>
-            </div>
+            <div class="chart-outer-wrap">
+                <div class="chart-wrap">
+                    <canvas baseChart 
+                    [datasets]="lineChartData" 
+                    [labels]="lineChartLabels" 
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors" 
+                    [legend]="lineChartLegend" 
+                    [chartType]="lineChartType" 
+                    [plugins]="lineChartPlugins">
+                    </canvas>
+                </div>
+            </div>    
         </div>
     </div>
 </section>

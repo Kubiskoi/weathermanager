@@ -31,8 +31,8 @@
     </div>
 </section>
 
-<section [ngClass]="{'dnone': !hasData}" class="table-section">
-    <div class="shadow bg-white">
+<section [ngClass]="{'dnone': !hasData}" class="shadow table-section">
+    <div class="bg-white">
         <div class="inner-section">
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
