@@ -14,6 +14,7 @@ import { Record } from '../models/record.model';
 })
 export class TableComponent implements OnInit, OnDestroy {
   btnText: string = 'Load Records';
+  filterVal: string = '';
   private recordsSubscription: Subscription;
   hasData = false;
   loading = false;
@@ -21,11 +22,10 @@ export class TableComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['no' ,'created', 'weather_state_name','the_temp' ,'air_pressure' ,'humidity' ,'wind_speed', 'visibility', 'predictability'];
   dataSource: MatTableDataSource<Record>;
   maxDate = new Date();
-
   dateForm: FormGroup;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
   
   constructor(
     private recordsService: RecordsService,
@@ -71,6 +71,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.loading = true;
+    this.filterVal = '';
 
     // empty table while request getting data
     this.dataSource = new MatTableDataSource([]);
