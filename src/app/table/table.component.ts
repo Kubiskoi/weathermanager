@@ -69,6 +69,9 @@ export class TableComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.loading = true;
 
+    // empty table while request getting data
+    this.dataSource = new MatTableDataSource([]);
+
     const date = new Date(this.dateForm.value.date);
     const year = date.getFullYear();
     const month = (date.getMonth() + 1);

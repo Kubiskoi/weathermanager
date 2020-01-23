@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { CalcService } from '../services/calc.service';
 import { HeatIndex } from '../models/heatIndex.model';
 import { Subscription } from 'rxjs';
+import { LocalStorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-calculator',
@@ -12,15 +13,16 @@ import { Subscription } from 'rxjs';
   providers: [{provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'primary' },}]
 })
-export class CalculatorComponent implements OnInit, OnDestroy {
+export class CalculatorComponent implements OnInit {
   calcForm: FormGroup;
   units = ['c','f'];
   heatIndex: HeatIndex;
   hasHeatIndexValue = false;
   heatIndexRecords: HeatIndex[] = [];
-  heatIndexRecordsSubscripion: Subscription;
 
-  constructor(private calcService: CalcService) { }
+  constructor(
+    private calcService: CalcService,
+    private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
 
@@ -46,14 +48,9 @@ export class CalculatorComponent implements OnInit, OnDestroy {
           this.calcForm.controls['temp'].updateValueAndValidity();
         }
       }
-    )
-
-    this.heatIndexRecords = this.calcService.getHeatIndexRecords();
-    this.heatIndexRecordsSubscripion = this.calcService.recordsSubjectChange.subscribe(
-      (records: HeatIndex[]) => {
-        this.heatIndexRecords = records;
-      }
     );
+    
+    this.heatIndexRecords = this.localStorageService.getHeatIndexRecords();
   }
 
   onSubmit() {
@@ -66,6 +63,9 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     );
 
     this.hasHeatIndexValue = true;
+
+    this.localStorageService.store(this.heatIndex);
+    this.heatIndexRecords = this.localStorageService.getHeatIndexRecords();
   }
 
   unitMin(control: FormControl): {[s: string]: boolean} {    
@@ -81,10 +81,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   }
 
   onClearHIrecords() {
-    this.calcService.clearStorage();
-  }
-
-  ngOnDestroy() {
-    this.heatIndexRecordsSubscripion.unsubscribe();
+    this.localStorageService.clearStorage();
+    this.heatIndexRecords = [];
   }
 }
